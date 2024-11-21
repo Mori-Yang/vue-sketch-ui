@@ -3,8 +3,16 @@
     <Button ref="buttonRef" size="large">Primary</Button>
     <Button type="success">Success</Button>
     <Button type="danger" size="small" dashed>Danger</Button>
-    <Button type="danger" plain dashed>Plain</Button>
+    <Button plain dashed>Plain</Button>
     <Button disabled size="large">Disable</Button>
+  </Block>
+  <br />
+  <Block>
+    <Button size="large" plain>Primary</Button>
+    <Button type="success" plain>Success</Button>
+    <Button type="danger" size="small" dashed plain>Danger</Button>
+    <Button plain dashed>Plain</Button>
+    <Button disabled size="large" plain>Disable</Button>
   </Block>
   <br />
   <Block>

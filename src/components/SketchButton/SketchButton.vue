@@ -12,6 +12,7 @@
     :disabled="disabled"
     :type="nativeType"
     :autofocus="autofocus"
+    :id="disabled ? 'disabled' : ''"
   >
     <span><slot></slot></span>
   </button>
@@ -53,6 +54,14 @@ defineExpose({
   background-color: var(--success-hover-color);
   border-color: var(--success-color);
 }
+.sk-button--success.is-plain {
+  border-color: var(--success-color);
+  color: var(--success-color);
+}
+.sk-button--success.is-plain:hover {
+  border-color: var(--success-hover-color);
+  color: var(--success-hover-color);
+}
 
 .sk-button--danger {
   background-color: var(--error-color);
@@ -60,6 +69,14 @@ defineExpose({
 .sk-button--danger:hover {
   background-color: var(--error-hover-color);
   border-color: var(--error-color);
+}
+.sk-button--danger.is-plain {
+  border-color: var(--error-color);
+  color: var(--error-color);
+}
+.sk-button--danger.is-plain:hover {
+  border-color: var(--error-hover-color);
+  color: var(--error-hover-color);
 }
 
 // size
@@ -73,18 +90,24 @@ defineExpose({
   font-size: var(--font-size-small);
 }
 // disable
-.is-disable {
+#disabled.is-disable {
+  background-color: var(--line-dark);
   color: var(--line-light);
-  background-color: var(--line-dark);
-}
-.is-disable:hover {
-  background-color: var(--line-dark);
+  border-color: var(--line-dark);
   cursor: no-drop;
+}
+#disabled.is-disable:hover {
+  border-color: var(--line-dark);
 }
 // plain
 .is-plain {
-  background-color: var(--line-dark);
+  background-color: var(--brand-color-light-1);
   color: var(--text-light);
+}
+.is-plain:hover {
+  background-color: var(--brand-color-light-1);
+  color: var(--brand-color-light-4);
+  border-color: var(--brand-color-light-4);
 }
 // dash
 .is-dashed {
