@@ -5,12 +5,24 @@
       'is-disabled': disabled,
     }"
   >
-    <div class="sk-collapse-item__header" :id="`item-header-${name}`" @click="handleClick">
+    <div
+      class="sk-collapse-item__header"
+      :id="`item-header-${name}`"
+      :class="{
+        'is-disabled': disabled,
+        'is-active': isActive,
+      }"
+      @click="handleClick"
+    >
       <slot name="header">{{ title }}</slot>
     </div>
-    <div v-show="isActive" class="sk-collapse-item__body" :id="`item-body-${name}`">
-      <slot></slot>
-    </div>
+    <Transition name="sk-slide" v-on="transitionEvents">
+      <div class="sk-collapse-item__body_wrapper" v-show="isActive">
+        <div class="sk-collapse-item__body" :id="`item-body-${name}`">
+          <slot></slot>
+        </div>
+      </div>
+    </Transition>
   </div>
 </template>
 
@@ -33,6 +45,31 @@ const handleClick = () => {
   if (disabled) return;
   context?.handleItemClick(name);
 };
+
+const transitionEvents: Record<string, (el: HTMLElement) => void> = {
+  beforeEnter(el) {
+    el.style.height = '0px';
+    el.style.overflow = 'hidden';
+  },
+  enter(el) {
+    el.style.height = `${el.scrollHeight}px`;
+  },
+  afterEnter(el) {
+    el.style.height = '';
+    el.style.overflow = '';
+  },
+  beforeLeave(el) {
+    el.style.height = `${el.scrollHeight}px`;
+    el.style.overflow = 'hidden';
+  },
+  leave(el) {
+    el.style.height = '0px';
+  },
+  afterLeave(el) {
+    el.style.height = '';
+    el.style.overflow = '';
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -41,32 +78,35 @@ const handleClick = () => {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  border-bottom: 1px solid var(--line-light);
 
   .sk-collapse-item__header {
     width: 100%;
     font-size: var(--font-size-large);
     font-weight: 600;
     background-color: var(--brand-color-light-3);
+    border-bottom: 1px solid var(--line-light);
     padding: 4px;
     cursor: pointer;
   }
-  .sk-collapse-item__body {
-    width: 100%;
-    font-size: var(--font-size-middle);
-    background-color: var(--brand-color);
-    min-height: calc(var(--font-size-middle) * 4);
-    color: var(--text-dark);
-    padding: 4px;
+  .sk-collapse-item__body_wrapper {
+    .sk-collapse-item__body {
+      width: 100%;
+      font-size: var(--font-size-middle);
+      background-color: var(--brand-color);
+      min-height: calc(var(--font-size-middle) * 4);
+      color: var(--text-dark);
+      padding: 4px;
+    }
   }
-}
 
-.is-disabled {
-  color: var(--line-light);
-  background-color: var(--line-dark);
-
-  .sk-collapse-item__header {
+  .is-disabled {
+    color: var(--line-light);
+    background-color: var(--line-dark);
     cursor: no-drop;
+  }
+
+  .is-active {
+    border-bottom-color: transparent;
   }
 }
 </style>

@@ -1,0 +1,17 @@
+.sk-fade-enter-from,
+.sk-fade-leave-to {
+  opacity: 0;
+}
+.sk-fade-enter-active,
+.sk-fade-leave-active {
+  transition: opacity 1s ease-in-out;
+}
+.sk-fade-ender-to,
+.sk-fade-leave-from {
+  opacity: 1;
+}
+
+.sk-slide-enter-active,
+.sk-slide-leave-active {
+  transition: height 0.5s ease-in-out;
+}
