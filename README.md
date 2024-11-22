@@ -6,3 +6,4 @@ vue-sketch-ui
 
 - Button
 - Collapse
+- Alert

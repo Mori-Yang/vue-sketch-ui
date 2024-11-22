@@ -79,10 +79,18 @@
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, aspernatur cum officia quae
         labore facere fugit nulla tempore natus ipsa!
       </SketchCollapseItem>
-      <SketchCollapseItem name="c" title="Disabled Item" disabled>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, quisquam.
-      </SketchCollapseItem>
     </SketchCollapse>
+  </Block>
+  <Block vertical>
+    <SketchAlert type="primary">
+      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis, dignissimos!
+    </SketchAlert>
+    <SketchAlert type="danger" icon="warning" closeable @close="close">
+      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis, dignissimos!
+    </SketchAlert>
+    <SketchAlert type="success" closeable :options="options">
+      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis, dignissimos!
+    </SketchAlert>
   </Block>
 </template>
 
@@ -90,11 +98,12 @@
 import { ref } from 'vue';
 import Block from '@@/SketchBlock/Block.vue';
 import Button from '@@/SketchButton/SketchButton.vue';
-import type { ButtonInstance } from '@@/SketchButton/types';
+import type { ButtonInstance, ButtonProps } from '@@/SketchButton/types';
 import SketchCollapse from '@/components/SketchCollapse/SketchCollapse.vue';
 import SketchCollapseItem from '@/components/SketchCollapse/SketchCollapseItem.vue';
 import type { CollapseChangeParam } from './components/SketchCollapse/types';
 import AwesomeIcon from './components/Icon/AwesomeIcon.vue';
+import SketchAlert from './components/SketchAlert/SketchAlert.vue';
 //---------SketchButton
 const buttonRef = ref<ButtonInstance | null>(null);
 const handleClick = (e: Event) => {
@@ -120,6 +129,18 @@ const openCollapse2 = ref([]);
 function doChange(name: CollapseChangeParam) {
   console.log(name);
 }
+//---------SketchAlert
+const close = () => {
+  alert('close');
+};
+const options: ButtonProps[] = [
+  {
+    type: 'danger',
+    size: 'small',
+    dashed: true,
+    text: 'info',
+  },
+];
 </script>
 
 <style scoped lang="scss"></style>

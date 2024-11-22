@@ -9,6 +9,7 @@ export interface ButtonProps {
   dashed?: boolean;
   icon?: string;
   loading?: boolean;
+  text?: string;
 
   // navite props
   nativeType?: NativeButtonType;
