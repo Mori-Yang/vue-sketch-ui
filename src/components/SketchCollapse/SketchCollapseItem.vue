@@ -14,7 +14,12 @@
       }"
       @click="handleClick"
     >
-      <slot name="header">{{ title }}</slot>
+      <AwesomeIcon :icon="faAngleRight" size="2xs" class="sk-collapse-item__header__angle" />
+      <slot name="header">
+        <span>
+          {{ title }}
+        </span>
+      </slot>
     </div>
     <Transition name="sk-slide" v-on="transitionEvents">
       <div class="sk-collapse-item__body_wrapper" v-show="isActive">
@@ -29,6 +34,8 @@
 <script setup lang="ts">
 import { computed, inject } from 'vue';
 import { CollapseConetxtKey, type CollapseItemProps } from './types';
+import AwesomeIcon from '../Icon/AwesomeIcon.vue';
+import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
 defineOptions({
   name: 'SketchCollapseItem',
@@ -88,6 +95,9 @@ const transitionEvents: Record<string, (el: HTMLElement) => void> = {
     padding: 4px;
     cursor: pointer;
   }
+  .sk-collapse-item__header__angle {
+    transition: transform 0.5s;
+  }
   .sk-collapse-item__body_wrapper {
     .sk-collapse-item__body {
       width: 100%;
@@ -101,12 +111,15 @@ const transitionEvents: Record<string, (el: HTMLElement) => void> = {
 
   .is-disabled {
     color: var(--line-light);
-    background-color: var(--line-dark);
+    background-color: var(--brand-color-light-2);
     cursor: no-drop;
   }
 
   .is-active {
     border-bottom-color: transparent;
+    .sk-collapse-item__header__angle {
+      transform: rotate(90deg);
+    }
   }
 }
 </style>

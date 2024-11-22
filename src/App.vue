@@ -1,20 +1,25 @@
 <template>
   <Block>
-    <Button ref="buttonRef" size="large">Primary</Button>
+    <Button ref="buttonRef" size="large" @click="handleClick">Primary</Button>
     <Button type="success">Success</Button>
     <Button type="danger" size="small" dashed>Danger</Button>
     <Button plain dashed>Plain</Button>
     <Button disabled size="large">Disable</Button>
   </Block>
-  <br />
   <Block>
     <Button size="large" plain>Primary</Button>
     <Button type="success" plain>Success</Button>
     <Button type="danger" size="small" dashed plain>Danger</Button>
     <Button plain dashed>Plain</Button>
-    <Button disabled size="large" plain>Disable</Button>
+    <Button size="large" plain disabled>Disable</Button>
   </Block>
-  <br />
+  <Block>
+    <Button :loading="loading1" @click="onLoad1">Click</Button>
+    <Button type="success" size="small" icon="arrow-up" @click="onLoad2" :loading="loading2"
+      >Click Upload</Button
+    >
+    <Button type="danger" size="small" dashed loading>Loading</Button>
+  </Block>
   <Block>
     <SketchCollapse v-model="openCollapse1" @change="doChange">
       <SketchCollapseItem name="1" title="Default Title">
@@ -37,7 +42,10 @@
       </SketchCollapseItem>
       <SketchCollapseItem name="2">
         <template #header>
-          <h3>Custom Title</h3>
+          <span>
+            <span>Custom Header</span>
+            <AwesomeIcon icon="street-view" />
+          </span>
         </template>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, aspernatur cum officia quae
         labore facere fugit nulla tempore natus ipsa!
@@ -67,10 +75,7 @@
         reprehenderit molestiae veritatis blanditiis dolores, ad earum. Delectus distinctio corporis
         reprehenderit tempora sit.
       </SketchCollapseItem>
-      <SketchCollapseItem name="b">
-        <template #header>
-          <h1>Accordion 2</h1>
-        </template>
+      <SketchCollapseItem name="b" title="Accordion 2">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, aspernatur cum officia quae
         labore facere fugit nulla tempore natus ipsa!
       </SketchCollapseItem>
@@ -89,8 +94,26 @@ import type { ButtonInstance } from '@@/SketchButton/types';
 import SketchCollapse from '@/components/SketchCollapse/SketchCollapse.vue';
 import SketchCollapseItem from '@/components/SketchCollapse/SketchCollapseItem.vue';
 import type { CollapseChangeParam } from './components/SketchCollapse/types';
+import AwesomeIcon from './components/Icon/AwesomeIcon.vue';
 //---------SketchButton
 const buttonRef = ref<ButtonInstance | null>(null);
+const handleClick = (e: Event) => {
+  console.log(e);
+};
+const loading1 = ref(false);
+const onLoad1 = () => {
+  loading1.value = true;
+  setTimeout(() => {
+    loading1.value = false;
+  }, 1000);
+};
+const loading2 = ref(false);
+const onLoad2 = () => {
+  loading2.value = true;
+  setTimeout(() => {
+    loading2.value = false;
+  }, 1000);
+};
 //---------SketchCollapse
 const openCollapse1 = ref([]);
 const openCollapse2 = ref([]);

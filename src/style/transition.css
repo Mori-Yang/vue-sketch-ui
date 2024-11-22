@@ -4,9 +4,9 @@
 }
 .sk-fade-enter-active,
 .sk-fade-leave-active {
-  transition: opacity 1s ease-in-out;
+  transition: opacity 0.5s ease-in-out;
 }
-.sk-fade-ender-to,
+.sk-fade-enter-to,
 .sk-fade-leave-from {
   opacity: 1;
 }

@@ -72,3 +72,7 @@ select {
     scroll-behavior: auto !important;
   }
 }
+
+[class*='sk-icon'] + span {
+  margin-left: 4px;
+}

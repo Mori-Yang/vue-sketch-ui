@@ -6,14 +6,16 @@
       [`sk-button--${type}`]: type,
       [`sk-button--${size}`]: size,
       'is-plain': plain,
-      'is-disable': disabled,
+      'is-disable': disabled || loading,
       'is-dashed': dashed,
     }"
-    :disabled="disabled"
+    :disabled="disabled || loading"
     :type="nativeType"
     :autofocus="autofocus"
-    :id="disabled ? 'disabled' : ''"
+    :id="disabled || loading ? 'disabled' : ''"
   >
+    <AwesomeIcon v-if="icon && !loading" :icon="icon" />
+    <AwesomeIcon v-if="loading" :icon="faSpinner" spin />
     <span><slot></slot></span>
   </button>
 </template>
@@ -21,6 +23,8 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import type { ButtonInstance, ButtonProps } from './types';
+import AwesomeIcon from '../Icon/AwesomeIcon.vue';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 defineOptions({
   name: 'SketchButton',
 });
@@ -91,7 +95,7 @@ defineExpose({
 }
 // disable
 #disabled.is-disable {
-  background-color: var(--line-dark);
+  background-color: var(--file-disabled);
   color: var(--line-light);
   border-color: var(--line-dark);
   cursor: no-drop;
