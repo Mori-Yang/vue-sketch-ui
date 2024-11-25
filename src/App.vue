@@ -92,6 +92,28 @@
       Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis, dignissimos!
     </SketchAlert>
   </Block>
+  <Block>
+    <SketchToolTip
+      content="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Incidunt, minus."
+      :delay="1000"
+    >
+      <Button type="success" size="small" dashed plain>Hover</Button>
+    </SketchToolTip>
+    <SketchToolTip trigger="click">
+      <template #content>
+        <Block>
+          <Button type="success" size="small" icon="arrow-up" @click="onLoad2" :loading="loading2"
+            >Click Upload</Button
+          >
+        </Block>
+      </template>
+      <Button type="danger" size="small" dashed plain>Click</Button>
+    </SketchToolTip>
+    <SketchToolTip>
+      <Button type="danger" size="small" dashed plain>Show in right box</Button>
+    </SketchToolTip>
+    <div style="border: 1px solid black">Box</div>
+  </Block>
 </template>
 
 <script setup lang="ts">
@@ -104,6 +126,7 @@ import SketchCollapseItem from '@/components/SketchCollapse/SketchCollapseItem.v
 import type { CollapseChangeParam } from './components/SketchCollapse/types';
 import AwesomeIcon from './components/Icon/AwesomeIcon.vue';
 import SketchAlert from './components/SketchAlert/SketchAlert.vue';
+import SketchToolTip from './components/SketchToolTip/SketchToolTip.vue';
 //---------SketchButton
 const buttonRef = ref<ButtonInstance | null>(null);
 const handleClick = (e: Event) => {
