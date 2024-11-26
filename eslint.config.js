@@ -1,6 +1,6 @@
-import pluginVue from 'eslint-plugin-vue'
-import vueTsEslintConfig from '@vue/eslint-config-typescript'
-import skipFormatting from '@vue/eslint-config-prettier/skip-formatting'
+import pluginVue from 'eslint-plugin-vue';
+import vueTsEslintConfig from '@vue/eslint-config-typescript';
+import skipFormatting from '@vue/eslint-config-prettier/skip-formatting';
 
 export default [
   {
@@ -20,10 +20,12 @@ export default [
       'vue/multi-word-component-names': 'off',
     },
   },
+  ...vueTsEslintConfig(),
+  skipFormatting,
   {
     /** add custom rules here */
     rules: {
-      'no-unused-vars': [
+      '@typescript-eslint/no-unused-vars': [
         'error',
         {
           vars: 'all',
@@ -34,6 +36,4 @@ export default [
       ],
     },
   },
-  ...vueTsEslintConfig(),
-  skipFormatting,
-]
+];

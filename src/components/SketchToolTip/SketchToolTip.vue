@@ -1,5 +1,5 @@
 <template>
-  <div class="sk-tooltip" v-on="events">
+  <div class="sk-tooltip" v-on="events" ref="tooltipNode">
     <!-- trigger -->
     <div class="sk-tooltip__trigger" ref="triggerNode">
       <slot></slot>
@@ -14,6 +14,8 @@
 <script setup lang="ts">
 import { reactive, ref, watch } from 'vue';
 import { type SketchToolTipProps, type SketchToolTipEmits } from './types';
+// hooks
+import useClickOutside from '@/hooks/useClickOutside';
 // popper
 import { createPopper, type Instance } from '@popperjs/core';
 defineOptions({
@@ -75,6 +77,14 @@ const events = reactive({
         }
       : () => {},
 });
+
+const handleClickOutside = (_: MouseEvent) => {
+  if (props.trigger === 'click' && show) {
+    handleClick();
+  }
+};
+const tooltipNode = ref<HTMLElement>();
+useClickOutside(tooltipNode, handleClickOutside);
 </script>
 
 <style lang="scss" scoped>
