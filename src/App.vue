@@ -95,11 +95,10 @@
   <Block>
     <SketchToolTip
       content="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Incidunt, minus."
-      :delay="200"
     >
       <Button type="success" size="small" dashed plain>Hover</Button>
     </SketchToolTip>
-    <SketchToolTip trigger="click">
+    <SketchToolTip trigger="click" :open-delay="200" :close-delay="200">
       <template #content>
         <Block>
           <Button type="success" size="small" icon="arrow-up" @click="onLoad2" :loading="loading2"
