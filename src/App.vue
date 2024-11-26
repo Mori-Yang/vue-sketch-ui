@@ -95,7 +95,7 @@
   <Block>
     <SketchToolTip
       content="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Incidunt, minus."
-      :delay="1000"
+      :delay="200"
     >
       <Button type="success" size="small" dashed plain>Hover</Button>
     </SketchToolTip>
@@ -109,10 +109,10 @@
       </template>
       <Button type="danger" size="small" dashed plain>Click</Button>
     </SketchToolTip>
-    <SketchToolTip>
-      <Button type="danger" size="small" dashed plain>Show in right box</Button>
+    <SketchToolTip manual content="Lorem ipsum dolor" placement="left" ref="tooltipRef">
+      <div style="border: 1px solid black">Box</div>
     </SketchToolTip>
-    <div style="border: 1px solid black">Box</div>
+    <Button type="danger" size="small" dashed plain @click="toggleTooltip">Show in left box</Button>
   </Block>
 </template>
 
@@ -127,6 +127,7 @@ import type { CollapseChangeParam } from './components/SketchCollapse/types';
 import AwesomeIcon from './components/Icon/AwesomeIcon.vue';
 import SketchAlert from './components/SketchAlert/SketchAlert.vue';
 import SketchToolTip from './components/SketchToolTip/SketchToolTip.vue';
+import { type SketchToolTipInstance } from './components/SketchToolTip/types';
 //---------SketchButton
 const buttonRef = ref<ButtonInstance | null>(null);
 const handleClick = (e: Event) => {
@@ -164,6 +165,17 @@ const options: ButtonProps[] = [
     text: 'info',
   },
 ];
+//---------SketchToolTip
+const tooltipRef = ref<SketchToolTipInstance | null>(null);
+const toggleTooltip = () => {
+  if (tooltipRef.value) {
+    if (tooltipRef.value.isShow) {
+      tooltipRef.value.hide();
+    } else {
+      tooltipRef.value.show();
+    }
+  }
+};
 </script>
 
 <style scoped lang="scss"></style>
