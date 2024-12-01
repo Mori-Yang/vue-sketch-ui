@@ -85,14 +85,16 @@ watch(
 );
 // v-on="events" 支持hover 和 click
 let leaveTimer: number | undefined = undefined;
-const events = reactive<Record<string, () => void>>({});
+const events = reactive<Record<string, (e: Event) => void>>({});
 const attachEvent = () => {
   if (props.trigger === 'click') {
-    events['click'] = () => {
-      if (show.value) {
-        hide();
-      } else {
+    events['click'] = (e: Event) => {
+      if (!show.value) {
         display();
+      } else {
+        if (triggerNode.value?.contains(e.target as HTMLElement)) {
+          hide();
+        }
       }
     };
   } else if (props.trigger === 'hover') {

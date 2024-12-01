@@ -99,8 +99,8 @@ const transitionEvents: Record<string, (el: HTMLElement) => void> = {
     transition: transform 0.5s;
   }
   .sk-collapse-item__body_wrapper {
+    width: 100%;
     .sk-collapse-item__body {
-      width: 100%;
       font-size: var(--font-size-middle);
       background-color: var(--brand-color);
       min-height: calc(var(--font-size-middle) * 4);
