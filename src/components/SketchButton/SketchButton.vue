@@ -6,7 +6,7 @@
       [`sk-button--${type}`]: type,
       [`sk-button--${size}`]: size,
       'is-plain': plain,
-      'is-disable': disabled || loading,
+      'is-disable': disabled,
       'is-dashed': dashed,
     }"
     :disabled="disabled || loading"

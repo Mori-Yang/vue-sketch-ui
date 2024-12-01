@@ -17,5 +17,6 @@ defineProps<FontAwesomeIconProps>();
 <style lang="scss" scoped>
 .sk-icon {
   display: inline-block;
+  min-width: 12px;
 }
 </style>
