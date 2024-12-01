@@ -1,4 +1,4 @@
-import type { Placement } from '@popperjs/core';
+import type { Instance, Placement } from '@popperjs/core';
 import type { Ref } from 'vue';
 
 export interface SketchToolTipProps {
@@ -6,7 +6,6 @@ export interface SketchToolTipProps {
   trigger?: 'hover' | 'click';
   manual?: boolean;
   placement?: Placement;
-  delay?: number;
   transition?: string;
   closeDelay?: number;
 }
@@ -19,4 +18,5 @@ export interface SketchToolTipInstance {
   show: () => void;
   hide: () => void;
   isShow: Ref<boolean>;
+  popperInstance: Ref<Instance | null>;
 }

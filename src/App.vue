@@ -98,7 +98,7 @@
     >
       <Button type="success" size="small" dashed plain>Hover</Button>
     </SketchToolTip>
-    <SketchToolTip trigger="click" :open-delay="200" :close-delay="200">
+    <SketchToolTip trigger="click" ref="tooltipRef1">
       <template #content>
         <Block>
           <Button type="success" size="small" icon="arrow-up" @click="onLoad2" :loading="loading2"
@@ -108,7 +108,7 @@
       </template>
       <Button type="danger" size="small" dashed plain>Click</Button>
     </SketchToolTip>
-    <SketchToolTip manual content="Lorem ipsum dolor" placement="left" ref="tooltipRef">
+    <SketchToolTip manual content="Lorem ipsum dolor" placement="left" ref="tooltipRef2">
       <div style="border: 1px solid black">Box</div>
     </SketchToolTip>
     <Button type="danger" size="small" dashed plain @click="toggleTooltip">Show in left box</Button>
@@ -150,6 +150,7 @@ const onLoad2 = () => {
 const openCollapse1 = ref([]);
 const openCollapse2 = ref([]);
 function doChange(name: CollapseChangeParam) {
+  // tooltipRef1.value?.popperInstance?.update();
   console.log(name);
 }
 //---------SketchAlert
@@ -165,13 +166,14 @@ const options: ButtonProps[] = [
   },
 ];
 //---------SketchToolTip
-const tooltipRef = ref<SketchToolTipInstance | null>(null);
+const tooltipRef1 = ref<SketchToolTipInstance | null>(null);
+const tooltipRef2 = ref<SketchToolTipInstance | null>(null);
 const toggleTooltip = () => {
-  if (tooltipRef.value) {
-    if (tooltipRef.value.isShow) {
-      tooltipRef.value.hide();
+  if (tooltipRef2.value) {
+    if (tooltipRef2.value.isShow) {
+      tooltipRef2.value.hide();
     } else {
-      tooltipRef.value.show();
+      tooltipRef2.value.show();
     }
   }
 };

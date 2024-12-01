@@ -1,7 +1,7 @@
 <template>
-  <div class="sk-tooltip" v-on="events" ref="tooltipNode">
+  <div class="sk-tooltip" ref="tooltipNode">
     <!-- trigger -->
-    <div class="sk-tooltip__trigger" ref="triggerNode">
+    <div class="sk-tooltip__trigger" ref="triggerNode" v-on="events">
       <slot></slot>
     </div>
     <!-- popper -->
@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, reactive, ref, watch } from 'vue';
+import { reactive, ref, watch } from 'vue';
 import type { SketchToolTipProps, SketchToolTipEmits, SketchToolTipInstance } from './types';
 // hooks
 import useClickOutside from '@/hooks/useClickOutside';
@@ -31,99 +31,66 @@ const props = withDefaults(defineProps<SketchToolTipProps>(), {
   trigger: 'hover',
   transition: 'sk-fade',
 });
-const delayOptions = computed(() => {
-  return {
-    openDelay: props.delay || 0,
-    closeDelay: props.closeDelay || props.delay || 0,
-  };
-});
-const emits = defineEmits<SketchToolTipEmits>();
 
+const emits = defineEmits<SketchToolTipEmits>();
 const show = ref(false);
+const tooltipNode = ref<HTMLElement>();
 const popperNode = ref<HTMLElement>();
 const triggerNode = ref<HTMLElement>();
-let popperInstance: null | Instance = null;
-// 最终触发的事件（最小事件单元）
+const popperInstance = ref<Instance | null>(null);
+// atom event
 const display = () => {
-  setTimeout(() => {
-    show.value = true;
-    emits('visible-change', show.value);
-  }, delayOptions.value.openDelay);
+  show.value = true;
+  emits('visible-change', show.value);
 };
 const hide = () => {
-  setTimeout(() => {
-    show.value = false;
-    emits('visible-change', show.value);
-  }, delayOptions.value.closeDelay);
-};
-const handleHover = (open: boolean) => {
-  show.value = open;
-  emits('visible-change', open);
+  show.value = false;
+  emits('visible-change', show.value);
 };
 watch(
   show,
-  (newV) => {
-    if (newV) {
+  (isShow) => {
+    if (isShow) {
       if (triggerNode.value && popperNode.value) {
-        popperInstance = createPopper(triggerNode.value, popperNode.value, {
+        popperInstance.value = createPopper(triggerNode.value, popperNode.value, {
           placement: props.placement,
-          modifiers: [
-            {
-              name: 'offset',
-              options: {
-                offset: [0, 6],
-              },
-            },
-          ],
         });
-      } else {
-        popperInstance?.destroy();
       }
     }
   },
-  { flush: 'post' },
+  {
+    flush: 'post',
+  },
 );
-// v-on="events" 支持hover 和 click
-let leaveTimer: number | undefined = undefined;
-const events = reactive<Record<string, (e: Event) => void>>({});
-const attachEvent = () => {
+const events = reactive<Record<string, () => void>>({});
+const attachEvents = () => {
   if (props.trigger === 'click') {
-    events['click'] = (e: Event) => {
-      if (!show.value) {
-        display();
+    events['click'] = () => {
+      if (show.value) {
+        hide();
       } else {
-        if (triggerNode.value?.contains(e.target as HTMLElement)) {
-          hide();
-        }
+        display();
       }
     };
   } else if (props.trigger === 'hover') {
     events['mouseenter'] = () => {
-      clearTimeout(leaveTimer);
-      handleHover(true);
+      display();
     };
     events['mouseleave'] = () => {
-      leaveTimer = setTimeout(() => {
-        handleHover(false);
-      }, delayOptions.value.closeDelay);
+      hide();
     };
   }
 };
 if (!props.manual) {
-  attachEvent();
+  // 声明手动时，不添加事件
+  attachEvents();
+  useClickOutside(tooltipNode, hide);
 }
-const handleClickOutside = (_: MouseEvent) => {
-  if (props.trigger === 'click' && show.value && !props.manual) {
-    hide();
-  }
-};
-const tooltipNode = ref<HTMLElement>();
-useClickOutside(tooltipNode, handleClickOutside);
-
 defineExpose<SketchToolTipInstance>({
   show: display,
-  hide,
+  hide: hide,
   isShow: show,
+  popperInstance,
 });
 </script>
 
