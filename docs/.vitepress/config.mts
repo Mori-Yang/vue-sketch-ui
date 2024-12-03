@@ -4,7 +4,7 @@ import { defineConfig } from 'vitepress';
 export default defineConfig({
   title: 'Sketch UI',
   description: '练手组件库项目而已',
-  base: '/repo/',
+  base: '/vue-sketch-ui/',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
