@@ -1,7 +1,7 @@
 <template>
-  <div class="sk-tooltip" ref="tooltipNode">
+  <div class="sk-tooltip" ref="tooltipNode" v-on="events">
     <!-- trigger -->
-    <div class="sk-tooltip__trigger" ref="triggerNode" v-on="events">
+    <div class="sk-tooltip__trigger" ref="triggerNode">
       <slot></slot>
     </div>
     <!-- popper -->
@@ -31,7 +31,6 @@ const props = withDefaults(defineProps<SketchToolTipProps>(), {
   trigger: 'hover',
   transition: 'sk-fade',
 });
-
 const emits = defineEmits<SketchToolTipEmits>();
 const show = ref(false);
 const tooltipNode = ref<HTMLElement>();
@@ -62,11 +61,15 @@ watch(
     flush: 'post',
   },
 );
-const events = reactive<Record<string, () => void>>({});
+const events = reactive<Record<string, (e: MouseEvent) => void>>({});
 const attachEvents = () => {
   if (props.trigger === 'click') {
-    events['click'] = () => {
-      if (show.value) {
+    events['click'] = (e: MouseEvent) => {
+      if (
+        show.value &&
+        (!tooltipNode.value?.contains(e.target as HTMLElement) ||
+          triggerNode.value?.contains(e.target as HTMLElement))
+      ) {
         hide();
       } else {
         display();

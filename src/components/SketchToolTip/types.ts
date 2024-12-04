@@ -15,8 +15,8 @@ export interface SketchToolTipEmits {
 }
 
 export interface SketchToolTipInstance {
-  show: () => void;
-  hide: () => void;
-  isShow: Ref<boolean>;
-  popperInstance: Ref<Instance | null>;
+  show?: () => void;
+  hide?: () => void;
+  isShow?: Ref<boolean>;
+  popperInstance?: Ref<Instance | null>;
 }

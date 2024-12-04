@@ -113,10 +113,18 @@
     </SketchToolTip>
     <Button type="danger" size="small" dashed plain @click="toggleTooltip">Show in left box</Button>
   </Block>
+  <Block>
+    <SketchDropdown :menu-options="dropdownOpt">
+      <Button size="small" dashed>Hover me</Button>
+    </SketchDropdown>
+    <DropdownJSX :menu-options="[{ key: 1, label: '1' }]" trigger="click">
+      <Button size="small" dashed>JSX有BUG 搞不明白</Button>
+    </DropdownJSX>
+  </Block>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { h, ref } from 'vue';
 import Block from '@@/SketchBlock/Block.vue';
 import Button from '@@/SketchButton/SketchButton.vue';
 import type { ButtonInstance, ButtonProps } from '@@/SketchButton/types';
@@ -127,6 +135,9 @@ import AwesomeIcon from './components/Icon/AwesomeIcon.vue';
 import SketchAlert from './components/SketchAlert/SketchAlert.vue';
 import SketchToolTip from './components/SketchToolTip/SketchToolTip.vue';
 import { type SketchToolTipInstance } from './components/SketchToolTip/types';
+import SketchDropdown from './components/SketchDropdown/SketchDropdown.vue';
+import DropdownJSX from './components/SketchDropdown/Dropdown';
+import type { MenuOption } from './components/SketchDropdown/types';
 //---------SketchButton
 const buttonRef = ref<ButtonInstance | null>(null);
 const handleClick = (e: Event) => {
@@ -171,12 +182,27 @@ const tooltipRef2 = ref<SketchToolTipInstance | null>(null);
 const toggleTooltip = () => {
   if (tooltipRef2.value) {
     if (tooltipRef2.value.isShow) {
-      tooltipRef2.value.hide();
+      tooltipRef2.value.hide?.();
     } else {
-      tooltipRef2.value.show();
+      tooltipRef2.value.show?.();
     }
   }
 };
+//---------SketchDropdown
+const dropdownOpt = ref<MenuOption[]>([
+  {
+    label: 'Item 1',
+    key: 1,
+  },
+  {
+    label: 'Item 2',
+    key: 2,
+  },
+  {
+    label: h('b', 'Item 3'),
+    key: 3,
+  },
+]);
 </script>
 
 <style scoped lang="scss"></style>
