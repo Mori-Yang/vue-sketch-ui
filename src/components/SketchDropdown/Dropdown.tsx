@@ -17,7 +17,7 @@ export default defineComponent({
     },
     placement: {
       type: String as PropType<Placement>,
-      default: 'hover',
+      default: 'top',
     },
     menuOptions: {
       type: Array as PropType<MenuOption[]>,
@@ -75,6 +75,7 @@ export default defineComponent({
           placement={props.placement}
           ref={tooltipRef}
           onVisible-change={visibleChange}
+          hideAfterClick={props.hideAfterClick}
         >
           {{
             default: () => slots.default && slots.default(),

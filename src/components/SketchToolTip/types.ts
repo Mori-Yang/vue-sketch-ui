@@ -8,6 +8,7 @@ export interface SketchToolTipProps {
   placement?: Placement;
   transition?: string;
   closeDelay?: number;
+  hideAfterClick?: boolean;
 }
 
 export interface SketchToolTipEmits {

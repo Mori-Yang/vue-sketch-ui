@@ -30,6 +30,7 @@ const props = withDefaults(defineProps<SketchToolTipProps>(), {
   manual: false,
   trigger: 'hover',
   transition: 'sk-fade',
+  hideAfterClick: false,
 });
 const emits = defineEmits<SketchToolTipEmits>();
 const show = ref(false);
@@ -68,7 +69,8 @@ const attachEvents = () => {
       if (
         show.value &&
         (!tooltipNode.value?.contains(e.target as HTMLElement) ||
-          triggerNode.value?.contains(e.target as HTMLElement))
+          triggerNode.value?.contains(e.target as HTMLElement) ||
+          props.hideAfterClick)
       ) {
         hide();
       } else {
@@ -103,6 +105,7 @@ defineExpose<SketchToolTipInstance>({
   padding: 8px;
   border-radius: 8px;
   border: 1px solid var(--brand-color-dark-1);
+  z-index: 2;
 
   #arrow,
   #arrow::before {

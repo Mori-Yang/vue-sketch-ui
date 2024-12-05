@@ -23,5 +23,7 @@ defineProps<SketchBlockProps>();
   margin: 10px;
   justify-content: space-around;
   align-items: center;
+  overflow-x: auto;
+  gap: 12px;
 }
 </style>

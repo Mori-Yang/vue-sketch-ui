@@ -117,7 +117,7 @@
     <SketchDropdown :menu-options="dropdownOpt">
       <Button size="small" dashed>Hover me</Button>
     </SketchDropdown>
-    <DropdownJSX :menu-options="[{ key: 1, label: '1' }]" trigger="click">
+    <DropdownJSX :menu-options="dropdownOpt" trigger="click">
       <Button size="small" dashed>JSX有BUG 搞不明白</Button>
     </DropdownJSX>
   </Block>
@@ -199,7 +199,7 @@ const dropdownOpt = ref<MenuOption[]>([
     key: 2,
   },
   {
-    label: h('b', 'Item 3'),
+    label: h(Button, {}, () => 'Item 3'),
     key: 3,
   },
 ]);
