@@ -121,6 +121,11 @@
       <Button size="small" dashed>JSX有BUG 搞不明白</Button>
     </DropdownJSX>
   </Block>
+  <Block>
+    <Button @click="showMessage1">Click</Button>
+    <Button @click="showMessage2" type="success">Click</Button>
+    <Button @click="showMessage3" type="danger" dashed>Click</Button>
+  </Block>
 </template>
 
 <script setup lang="ts">
@@ -137,7 +142,9 @@ import SketchToolTip from './components/SketchToolTip/SketchToolTip.vue';
 import { type SketchToolTipInstance } from './components/SketchToolTip/types';
 import SketchDropdown from './components/SketchDropdown/SketchDropdown.vue';
 import DropdownJSX from './components/SketchDropdown/Dropdown';
+
 import type { MenuOption } from './components/SketchDropdown/types';
+import { createMessage } from './components/SketchMessage/methods';
 //---------SketchButton
 const buttonRef = ref<ButtonInstance | null>(null);
 const handleClick = (e: Event) => {
@@ -203,6 +210,33 @@ const dropdownOpt = ref<MenuOption[]>([
     key: 3,
   },
 ]);
+// ----------SketchMessage
+function showMessage1() {
+  createMessage({
+    duration: 0,
+    closeable: true,
+    message: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum, mollitia!',
+  });
+}
+function showMessage2() {
+  createMessage({
+    duration: 0,
+    closeable: true,
+    message:
+      'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum, mollitia!onsectetur adipisicing elit. Ipsum, mollitia!Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum, mollitia!Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum, mollitia!Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum, mollitia!Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum, molliti',
+    type: 'success',
+    offset: 60,
+  });
+}
+function showMessage3() {
+  createMessage({
+    duration: 1000,
+    closeable: true,
+    message: 'Lorem ipsum dolor sit, amet ca!',
+    type: 'error',
+    offset: 100,
+  });
+}
 </script>
 
 <style scoped lang="scss"></style>

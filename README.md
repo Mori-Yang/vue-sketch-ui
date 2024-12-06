@@ -8,3 +8,5 @@ vue-sketch-ui
 - Collapse
 - Alert
 - ToolTip
+- Dropdown
+- Message
