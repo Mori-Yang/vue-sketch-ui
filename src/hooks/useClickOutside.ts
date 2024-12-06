@@ -7,9 +7,7 @@ const useClickOutside = (
   const handler = (e: MouseEvent) => {
     if (elementRef.value && e.target) {
       if (!elementRef.value.contains(e.target as HTMLElement)) {
-        setTimeout(() => {
-          callback(e);
-        });
+        callback(e);
       }
     }
   };

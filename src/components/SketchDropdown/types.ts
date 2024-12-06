@@ -13,7 +13,7 @@ export interface MenuOption {
 }
 export interface SketchDropdownProps extends SketchToolTipProps {
   menuOptions: MenuOption[];
-  hideAfterClick?: true;
+  hideAfterClick?: boolean;
 }
 
 export interface SketchDropdownEmits extends SketchToolTipEmits {

@@ -49,7 +49,7 @@ defineOptions({
   name: 'SketchDropdown',
 });
 const props = withDefaults(defineProps<SketchDropdownProps>(), {
-  hideAfterClick: true,
+  hideAfterClick: false,
 });
 const emits = defineEmits<SketchDropdownEmits>();
 const options = props.menuOptions;
