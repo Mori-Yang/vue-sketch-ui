@@ -5,6 +5,21 @@ import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import dts from 'vite-plugin-dts';
 
+// dts自己配置时不生成.d.ts
+// dts({
+//   include: ['src/index.ts', 'src/components/**/*', 'src/hooks/**/*', 'src/directives/**/*'],
+//   exclude: ['node_modules'],
+//   outDir: 'dist',
+//   compilerOptions: {
+//     sourceMap: false,
+//     paths: {
+//       '@/*': ['./src/*'],
+//       '@@/*': ['./src/components/*'],
+//     },
+//   },
+//   copyDtsFiles: true,
+//   pathsToAliases: false,
+// }),
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
