@@ -1,0 +1,44 @@
+{
+    "compilerOptions": {
+        "target": "esnext",
+        "module": "esnext",
+        "allowJs": false,
+        "strict": true,
+        "jsx": "preserve",
+        "importHelpers": true,
+        "moduleResolution": "bundler",
+        "skipLibCheck": true,
+        "noUnusedLocals": false,
+        "experimentalDecorators": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "jsxImportSource": "vue",
+        "sourceMap": false,
+        "baseUrl": ".",
+        "types": [
+            "node",
+            "vite/client",
+        ],
+        "paths": {
+            "@/*": [
+                "./src/*"
+            ],
+            "@@/*": [
+                "./src/components/*"
+            ]
+        },
+        "lib": [
+            "dom"
+        ]
+    },
+    "include": [
+        "src/index.ts",
+        "src/components/**/*",
+        "src/hooks/**/*",
+        "directives",
+        "src/directives/**/*",
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}

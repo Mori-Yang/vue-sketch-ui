@@ -42,7 +42,7 @@ export default {
     const nextOffset = ref(0);
     const curOffset = ref(0);
     const visible = ref(false);
-    const timer = ref<number | undefined>(undefined);
+    const timer = ref<ReturnType<typeof setTimeout> | undefined>(undefined);
     const height = ref<number | undefined>(0);
     function handleClose() {
       visible.value = false;

@@ -11,16 +11,7 @@ export default defineConfig({
     vue(),
     vueJsx(),
     dts({
-      include: ['src/index.ts', 'src/components/**/*', 'src/hooks/**/*', 'src/directives/**/*'],
-      exclude: ['node_modules'],
-      outDir: 'dist',
-      compilerOptions: {
-        sourceMap: false,
-        paths: {
-          '@/*': ['./src/*'],
-          '@@/*': ['./src/components/*'],
-        },
-      },
+      tsconfigPath: 'tsconfig.build.json',
       copyDtsFiles: true,
       pathsToAliases: false,
     }),
