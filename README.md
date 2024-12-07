@@ -10,3 +10,10 @@ vue-sketch-ui
 - ToolTip
 - Dropdown
 - Message
+
+
+# Pendding
+
+* npm安装后：全局样式变量没有引入
+* message相关api不存在
+* awesomeicon没导入
