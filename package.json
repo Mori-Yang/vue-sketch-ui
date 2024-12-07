@@ -1,7 +1,6 @@
 {
   "name": "vue-sketch-ui",
-  "version": "0.0.0",
-  "private": true,
+  "version": "0.0.1-beta.0",
   "type": "module",
   "files": [
     "dist"
