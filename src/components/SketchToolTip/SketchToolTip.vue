@@ -43,7 +43,10 @@ const display = () => {
   show.value = true;
   emits('visible-change', show.value);
 };
-const hide = () => {
+const hide = (inner?: boolean) => {
+  if (!inner) {
+    return;
+  }
   show.value = false;
   emits('visible-change', show.value);
 };
@@ -66,13 +69,18 @@ const events = reactive<Record<string, (e: MouseEvent) => void>>({});
 const attachEvents = () => {
   if (props.trigger === 'click') {
     events['click'] = (e: MouseEvent) => {
+      if (props.hideAfterClick) {
+        if (show.value) {
+          hide(true);
+          return;
+        }
+      }
       if (
         show.value &&
         (!tooltipNode.value?.contains(e.target as HTMLElement) ||
-          triggerNode.value?.contains(e.target as HTMLElement) ||
-          props.hideAfterClick)
+          triggerNode.value?.contains(e.target as HTMLElement))
       ) {
-        hide();
+        hide(true);
       } else {
         display();
       }
@@ -82,14 +90,16 @@ const attachEvents = () => {
       display();
     };
     events['mouseleave'] = () => {
-      hide();
+      hide(true);
     };
   }
 };
 if (!props.manual) {
   // 声明手动时，不添加事件
   attachEvents();
-  useClickOutside(tooltipNode, hide);
+  useClickOutside(tooltipNode, () => {
+    hide(true);
+  });
 }
 defineExpose<SketchToolTipInstance>({
   show: display,

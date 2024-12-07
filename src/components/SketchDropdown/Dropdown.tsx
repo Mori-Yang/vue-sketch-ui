@@ -66,7 +66,6 @@ export default defineComponent({
     });
     expose({
       show: () => tooltipRef.value?.show?.(),
-      hide: () => tooltipRef.value?.hide?.(),
     });
     return () => (
       <div class="sk-dropdown">

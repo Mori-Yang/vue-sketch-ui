@@ -12,7 +12,7 @@ Dropdown组件提供了组件写法和JSX写法
     <SketchDropdown :menu-options="dropdownOpt">
         <SketchButton size="small" dashed>Hover me</SketchButton>
     </SketchDropdown>
-    <DropdownJSX :menu-options="dropdownOpt2" trigger="click">
+    <DropdownJSX :menu-options="dropdownOpt2" trigger="click" >
         <SketchButton size="small" dashed>JSX</SketchButton>
     </DropdownJSX>
 </Block>
@@ -112,9 +112,13 @@ const dropdownOpt2 = ref([
     key: 1,
   },
   {
-    label:h(SketchButton, {
-        type:'success'
-    },()=>'Item 2'),
+    label: h(
+      SketchButton,
+      {
+        type: 'success',
+      },
+      () => 'Item 2',
+    ),
     key: 2,
   },
   {
