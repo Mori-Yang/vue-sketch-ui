@@ -35,7 +35,6 @@
         "src/index.ts",
         "src/components/**/*",
         "src/hooks/**/*",
-        "directives",
         "src/directives/**/*",
     ],
     "exclude": [
