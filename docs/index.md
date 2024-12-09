@@ -8,6 +8,9 @@ hero:
   tagline: My great project tagline
   actions:
     - theme: brand
+      text: Get Started 👉
+      link: /install
+    - theme: alt
       text: Components
       link: /components/button
 
